@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MABURUNG Bakery - Inventory Management System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            overflow-x: hidden;
+            color: #333;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #ff6b00, #ff9e00);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin-right: 20px;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 1.3rem;
+            font-weight: 300;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: #333;
+            padding: 15px 0;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin: 0 15px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            background-color: #ff6b00;
+        }
+
+        /* Main Content */
+        .content-section {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 30px;
+            margin: 30px 0;
+        }
+
+        h3 {
+            color: #ff6b00;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        h4 {
+            color: #ff9e00;
+            margin: 25px 0 15px;
+            font-size: 1.4rem;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        ul, ol {
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        /* SWOT Table */
+        .swot-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+        }
+
+        .swot-table th, .swot-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .swot-table th {
+            background-color: #ff6b00;
+            color: white;
+        }
+
+        .swot-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .swot-table tr:hover {
+            background-color: #fff5e6;
+        }
+
+        /* System Features */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .feature-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            padding: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-card i {
+            font-size: 2.5rem;
+            color: #ff6b00;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .feature-card h5 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        /* Implementation Timeline */
+        .timeline {
+            position: relative;
+            max-width: 100%;
+            margin: 30px 0;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background-color: #ff9e00;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border: 4px solid #ff6b00;
+            border-radius: 50%;
+            top: 15px;
+            z-index: 1;
+        }
+
+        .left {
+            left: 0;
+        }
+
+        .right {
+            left: 50%;
+        }
+
+        .left::after {
+            right: -12px;
+        }
+
+        .right::after {
+            left: -12px;
+        }
+
+        .timeline-content {
+            padding: 20px;
+            background-color: white;
+            border-radius: 6px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline-content h5 {
+            color: #ff6b00;
+            margin-bottom: 10px;
+        }
+
+        /* Risk Matrix */
+        .risk-matrix {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin: 25px 0;
+        }
+
+        .risk-category {
+            background-color: #fff;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+        }
+
+        .risk-category h5 {
+            color: #ff6b00;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 8px;
+        }
+
+        /* References */
+        .references {
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 30px 0;
+        }
+
+        .references h4 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .reference-item {
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav-links li {
+                margin: 5px 0;
+            }
+            
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item::after {
+                left: 21px;
+            }
+            
+            .left::after, .right::after {
+                left: 21px;
+            }
+            
+            .right {
+                left: 0%;
+            }
+            
+            .risk-matrix {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animated {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+
+        /* Interactive Elements */
+        .btn {
+            display: inline-block;
+            background-color: #ff6b00;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .btn:hover {
+            background-color: #ff8c00;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-secondary {
+            background-color: #333;
+        }
+
+        .btn-secondary:hover {
+            background-color: #555;
+        }
+
+        /* Dashboard Specific Styles */
+        .dashboard {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 20px;
+        }
+
+        .sidebar {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            height: fit-content;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar-menu a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-menu a:hover, .sidebar-menu a.active {
+            background-color: #ff6b00;
+        }
+
+        .sidebar-menu i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .main-content {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 20px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-card i {
+            font-size: 2rem;
+            color: #ff6b00;
+            margin-bottom: 10px;
+        }
+
+        .stat-card h4 {
+            color: #333;
+            margin: 10px 0 5px;
+            font-size: 1.1rem;
+        }
+
+        .stat-card p {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #ff6b00;
+            margin: 0;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #ff6b00;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #fff5e6;
+        }
+
+        .warning {
+            color: #ff9800;
+            font-weight: bold;
+        }
+
+        .danger {
+            color: #f44336;
+            font-weight: bold;
+        }
+
+        .success {
+            color: #4caf50;
+            font-weight: bold;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            width: 80%;
+            max-width: 600px;
+            position: relative;
+            animation: modalopen 0.4s;
+        }
+
+        @keyframes modalopen {
+            from {opacity: 0; transform: translateY(-50px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+
+        .close-modal {
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-modal:hover {
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: #ff6b00;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(255,107,0,0.2);
+        }
+
+        .submit-btn {
+            background-color: #ff6b00;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: #ff8c00;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo-container">
+                
+                <img src="image.png" alt="MABURUNG Bakery Logo" class="logo">
+                <div>
+                    <h1>MABURUNG Bakery</h1>
+                    <h2>Inventory Management System</h2>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul class="nav-links">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#proposal">Proposal</a></li>
+                <li><a href="#system">System Design</a></li>
+                <li><a href="#implementation">Implementation</a></li>
+                <li><a href="#dashboard">Dashboard</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- Home Section -->
+        <section id="home" class="content-section animated">
+            <h3>Enhancing MABURUNG Bakery's Operations through an Inventory Management System</h3>
+            <p><strong>Group Members:</strong> Thabiso sesiu, Lereto lephallo, Boitumelo mosiuoa, Tumisang khobatha, Letele Mokapela</p>
+            <p><strong>Course Name and Code:</strong> DISA/BISA2210 – Systems Analysis and Design</p>
+            <p><strong>Submission Date:</strong> WEEK 14</p>
+            
+            <h4 class="delay-1">Executive Summary</h4>
+            <p>This proposal presents a Business Information System (BIS) plan tailored for MABURUNG Bakery, a local small enterprise in Lesotho. The business faces growing demand but lacks efficient tools to track stock levels, forecast inventory needs, and reduce waste. The proposed Inventory Management System will automate and optimize these operations. By implementing this BIS, the bakery is expected to reduce losses, improve production planning, ensure product availability, and gain a competitive edge in the market.</p>
+        </section>
+
+        <!-- Proposal Section -->
+        <section id="proposal" class="content-section animated delay-1">
+            <h3>Project Proposal</h3>
+            
+            <h4>1. Introduction</h4>
+            <h5>1.1 Company Overview</h5>
+            <p>MABURUNG Bakery is a small-scale enterprise based in Lesotho, providing a range of baked products such as bread, scones, cakes, and buns. The bakery operates in a semi-urban area, serving local customers daily with a commitment to freshness and affordability. It employs a handful of staff and relies primarily on manual processes for baking, sales tracking, and inventory recording. The bakery's mission is to deliver quality products while preserving traditional baking techniques and fostering community well-being (Mokoena, 2022).</p>
+            <p>However, the absence of digital systems has begun to hinder its efficiency, especially with increasing customer demand and inventory mismanagement. SMEs in Lesotho, like MABURUNG Bakery, often struggle to scale due to poor resource tracking and limited automation (World Bank, 2023).</p>
+            
+            <h5>1.2 Purpose of the Proposal</h5>
+            <p>The purpose of this proposal is to introduce a Business Information System (BIS), specifically an Inventory Management System, to improve operational efficiency at MABURUNG Bakery. This system will enable the bakery to track raw material usage, manage finished product levels, and automate restocking alerts. Such systems are critical for SMEs to avoid stock-outs, reduce waste, and align production with demand (Kumar & Saini, 2021).</p>
+            <p>According to Mutula and Van Brakel (2020), digitizing business processes for SMEs in Southern Africa significantly enhances productivity and market competitiveness. By adopting a tailored BIS, MABURUNG Bakery stands to improve workflow efficiency, reduce manual errors, and respond faster to customer needs—an essential step towards sustainable growth.</p>
+            
+            <h4>2. Current Business Processes Analysis</h4>
+            <h5>2.1 Description of Current Operations</h5>
+            <p>MABURUNG Bakery currently operates using traditional manual processes. Ingredient procurement is done on an as-needed basis, often relying on estimations rather than precise inventory tracking. Daily sales are recorded in notebooks, and stock usage is not monitored systematically. Staff manually check flour, sugar, eggs, and other supplies to determine what is needed for production. There is no real-time system to monitor sales trends, reordering points, or spoilage (Molapo, 2022).</p>
+            <p>The business uses basic spreadsheets occasionally for recording sales summaries, but these are updated inconsistently. There is no integration between purchasing, production, and sales data. Communication between employees is verbal, which often results in missed instructions and inconsistent production outputs.</p>
+            <p>This lack of automation and structured information flow leads to inefficiencies, frequent stock-outs, and loss of perishable ingredients due to over-ordering or under-utilization (Kebede & Chikafa, 2023).</p>
+            
+            <h5>2.2 Identified Challenges</h5>
+            <p>Key challenges currently facing MABURUNG Bakery include:</p>
+            <ul>
+                <li><strong>Inventory Inaccuracy:</strong> Manual stock checks lead to errors in understanding what materials are available or required.</li>
+                <li><strong>Wastage:</strong> Perishable ingredients such as milk and yeast are often wasted due to lack of proper inventory tracking.</li>
+                <li><strong>Data Silos:</strong> Sales data is not connected to inventory or procurement decisions, resulting in inefficiencies.</li>
+                <li><strong>Communication Gaps:</strong> Without a centralized information system, internal communication is inconsistent.</li>
+                <li><strong>No Forecasting Tools:</strong> The business cannot predict demand or prepare for peak periods due to the absence of analytical tools.</li>
+                <li><strong>Limited Reporting:</strong> Business decisions are made without real-time performance metrics or reports.</li>
+            </ul>
+            <p>These challenges contribute to increased costs, missed sales opportunities, and customer dissatisfaction during high-demand periods (UNDP Lesotho, 2023).</p>
+            
+            <h5>2.3 SWOT Analysis</h5>
+            <table class="swot-table">
+                <thead>
+                    <tr>
+                        <th>Strengths</th>
+                        <th>Weaknesses</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <ul>
+                                <li>Skilled bakers with traditional expertise</li>
+                                <li>Loyal local customer base</li>
+                                <li>Variety of popular baked goods</li>
+                                <li>Cost-effective local sourcing of ingredients</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li>Manual stock tracking leads to inaccuracies</li>
+                                <li>Lack of automation in sales and inventory management</li>
+                                <li>No integration between departments (sales, inventory, etc.)</li>
+                                <li>Time-consuming manual processes</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+                <thead>
+                    <tr>
+                        <th>Opportunities</th>
+                        <th>Threats</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <ul>
+                                <li>Adoption of Inventory Management Systems</li>
+                                <li>Government support for digitalizing SMEs in Lesotho</li>
+                                <li>Growing urban population increases market demand</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li>Rising ingredient prices and inflation</li>
+                                <li>Competition from modern bakeries with digital tools</li>
+                                <li>Economic instability impacting customer purchasing power</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="text-center"><em>Source: Author's compilation based on company observation and secondary research, 2025</em></p>
+        </section>
+
+        <!-- System Design Section -->
+        <section id="system" class="content-section animated delay-2">
+            <h3>Proposed Business Information System</h3>
+            
+            <h4>3.1 System Overview</h4>
+            <p>MABURUNG Bakery requires a custom Inventory Management System (IMS) designed specifically for small-scale bakery operations. The proposed BIS is a centralized, user-friendly application that automates stock monitoring, ingredient tracking, order processing, and reporting. It will streamline how ingredients are purchased, stored, used, and restocked, minimizing human error and maximizing productivity.</p>
+            <p>The system will be a web-based solution, accessible on desktop and mobile devices. It will use a modular architecture, allowing for future expansion (e.g., integration with sales, accounting, or delivery platforms). The core modules include inventory tracking, supplier management, restock alerts, and reporting dashboards.</p>
+            <p>This BIS will help MABURUNG Bakery address inefficiencies in stock control, eliminate paper-based records, reduce ingredient waste, and improve decision-making through analytics.</p>
+            
+            <h4>3.2 Key Features</h4>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-sync-alt"></i>
+                    <h5>Real-Time Inventory Tracking</h5>
+                    <p>Monitors quantities of raw materials (e.g., flour, sugar, eggs) and finished goods. Automatically deducts used quantities during production.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-bell"></i>
+                    <h5>Low-Stock Alerts and Auto-Reorder Suggestions</h5>
+                    <p>Notifies staff when an ingredient reaches the reorder threshold. Suggests reorder quantities based on average usage.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-truck"></i>
+                    <h5>Supplier and Purchase Order Management</h5>
+                    <p>Stores supplier contacts, past orders, and pricing. Generates purchase orders automatically.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-industry"></i>
+                    <h5>Production Planning and Batch Tracking</h5>
+                    <p>Links recipes to required ingredient quantities. Tracks batches produced and their associated stock usage.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-user-shield"></i>
+                    <h5>User Access Levels</h5>
+                    <p>Admin (full access), Inventory Manager (limited access), Viewer (read-only).</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h5>Reporting and Analytics</h5>
+                    <p>Generates reports on daily stock movements, wastage, order history. Visual dashboards showing inventory trends and alerts.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h5>Mobile Compatibility</h5>
+                    <p>Staff can update stock counts using tablets or smartphones.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h5>Backup and Security</h5>
+                    <p>Daily backups and role-based access control to protect data integrity.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-plug"></i>
+                    <h5>Integration Ready</h5>
+                    <p>Ready for future integration with POS, accounting, and payroll systems.</p>
+                </div>
+            </div>
+            
+            <h4>3.3 System Architecture</h4>
+            <table class="swot-table">
+                <thead>
+                    <tr>
+                        <th>Layer</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>User Interface</td>
+                        <td>Web interface (HTML, CSS, JavaScript), mobile-friendly design</td>
+                    </tr>
+                    <tr>
+                        <td>Application Layer</td>
+                        <td>Developed using PHP or Node.js; handles business logic</td>
+                    </tr>
+                    <tr>
+                        <td>Database Layer</td>
+                        <td>PostgreSQL or MySQL for storing inventory, users, and supplier data</td>
+                    </tr>
+                    <tr>
+                        <td>Security Layer</td>
+                        <td>Authentication (email/password), user roles, and audit logs</td>
+                    </tr>
+                    <tr>
+                        <td>Reporting Layer</td>
+                        <td>Charting libraries (e.g., Chart.js or Google Charts) for dashboards</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h5>Deployment Options:</h5>
+            <ul>
+                <li><strong>Local Server:</strong> For offline-first use in low-connectivity areas.</li>
+                <li><strong>Cloud Deployment (e.g., Google Cloud):</strong> For real-time access and backup.</li>
+            </ul>
+            
+            <h5>Technical Tools and Stack</h5>
+            <ul>
+                <li><strong>Frontend:</strong> HTML5, Bootstrap, JavaScript</li>
+                <li><strong>Backend:</strong> Node.js / PHP</li>
+                <li><strong>Database:</strong> PostgreSQL / MySQL</li>
+                <li><strong>Security:</strong> HTTPS, JWT authentication</li>
+                <li><strong>Reporting Tools:</strong> Chart.js / Google Charts</li>
+            </ul>
+            
+            <h5>User Roles & Interfaces</h5>
+            <table class="swot-table">
+                <thead>
+                    <tr>
+                        <th>Role</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Admin</td>
+                        <td>Full access to all system functionalities</td>
+                    </tr>
+                    <tr>
+                        <td>Inventory Manager</td>
+                        <td>Manages stock entries, purchases, and reporting</td>
+                    </tr>
+                    <tr>
+                        <td>Viewer</td>
+                        <td>Can view reports and stock levels but cannot make changes</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h5>System Workflow Diagram (Simplified)</h5>
+            <p>User Login → Dashboard → Inventory Overview → Stock Updates / Alerts → Generate Reports → Logout</p>
+            
+            <h4>3.4 Alignment with MABURUNG Bakery Needs</h4>
+            <p>The proposed system directly addresses MABURUNG Bakery's operational pain points:</p>
+            <ul>
+                <li>Eliminates manual stock tracking and reduces wastage</li>
+                <li>Enables timely procurement and reduces stock-outs</li>
+                <li>Improves record-keeping and simplifies audits</li>
+                <li>Provides actionable data to support better decision-making</li>
+            </ul>
+            <p>By implementing this Inventory Management System, the bakery will not only improve its efficiency but will also set the stage for digital transformation that supports business growth.</p>
+            
+            <h4>4. Benefits of the Proposed System</h4>
+            <p>Implementing the Inventory Management System (IMS) at MABURUNG Bakery is expected to dramatically improve operational efficiency across all levels of the business. One of the primary benefits is the automation of manual processes, which not only saves time but also reduces the likelihood of human error. For example, instead of recording stock levels in a notebook or spreadsheet—practices which are prone to omissions and data loss—staff will now input or scan items into a centralized system in real time. When flour or sugar is used in production, quantities are automatically deducted from inventory, allowing accurate monitoring. This real-time visibility allows staff to see, at a glance, what ingredients are available and which are nearing depletion. In a bakery setting where freshness is crucial, being able to track perishable ingredients such as eggs, yeast, and cream ensures that expired stock is discarded before it affects product quality. Similar systems have improved bakery operations in SMEs like Nala Sweets in South Africa and LesCakes in Maseru, where automated tracking led to a 25% reduction in stock wastage within six months (Mashaba, 2022; UNDP Lesotho, 2023; Kumar & Singh, 2021).</p>
+            <p>Another notable advantage of the system is cost savings, particularly in procurement and labor. By maintaining historical data on usage patterns, the IMS can suggest optimal reorder quantities, preventing both understocking and overstocking. For example, if the bakery frequently runs out of chocolate chips during weekends due to high demand for muffins, the system can identify this trend and prompt timely restocking before peak hours. Conversely, it prevents bulk ordering of rarely used items like marzipan or almond extract, which may expire before use. These insights support lean inventory practices, leading to significant savings. Moreover, because processes like order generation, inventory reconciliation, and report compilation are automated, fewer staff hours are required to manage stock, allowing reallocation of labor to customer service or production tasks. Similar benefits were documented in bakeries across Malawi and Zambia where inventory automation systems led to labor cost reductions of 10-15% per month (Williams & Zhao, 2021; Chikafa & Kebede, 2023; World Bank, 2023).</p>
+            <p>In terms of data accuracy and accountability, the system enables the bakery to maintain a verifiable digital trail for all stock movements. This is particularly important in businesses with high turnover and multiple employees handling stock, where accountability may be difficult to enforce using traditional methods. For instance, every adjustment—be it a stock-in, stock-out, or transfer—is timestamped and linked to a specific user. This traceability discourages stock pilferage and simplifies internal audits. The ability to assign user roles, such as admin, inventory manager, and viewer, ensures that sensitive actions (e.g., deleting a record or changing supplier information) are only carried out by authorized personnel. This is particularly helpful in preventing unauthorized access and maintaining data integrity, a lesson learned by small-scale bakeries like Tandoori Treats in Botswana and Bakery Bantu in Lesotho, where unclear access privileges previously led to data manipulation and loss of inventory (Mthimkhulu, 2022; Mashaba, 2022; UNDP Lesotho, 2023).</p>
+            <p>The IMS will also elevate decision-making by providing timely and actionable insights into bakery operations. With built-in dashboards and reporting tools, the system will visualize trends such as which ingredients are used most frequently, what times of the year see the highest production volume, and which suppliers consistently deliver on time. These analytics help management make informed procurement and pricing decisions. For instance, if the system reveals that whole wheat bread has higher turnover than white bread during winter months, production can be adjusted to meet demand and reduce waste. Similarly, comparing supplier performance over time can assist the bakery in renegotiating contracts or finding more reliable vendors. This aligns with findings from digital transformation case studies in SMEs like AfriLoaf (South Africa), LePain (Namibia), and Village Crusts (Lesotho), where dashboard-driven inventory systems enabled up to 30% improvement in procurement planning (Kumar & Singh, 2021; World Bank, 2023; Kebede & Chikafa, 2023).</p>
+            <p>Finally, the system's modularity and integration potential provide long-term benefits by supporting business growth. As MABURUNG Bakery expands its operations, the IMS can be integrated with additional business systems such as Point of Sale (POS), accounting software, or delivery logistics platforms. This scalability ensures that the bakery does not need to overhaul its infrastructure with each growth phase. Additionally, the cloud-ready nature of the system means that managers can access stock information remotely, which is especially useful during off-site baking events or community festivals. This capability has already been leveraged by SMEs like CakeCity in Kenya and BakeWell Namibia, enabling them to coordinate supply chain and production from remote locations with minimal disruptions. Integration readiness also increases the likelihood of MABURUNG Bakery qualifying for digital innovation grants or partnerships with NGOs supporting entrepreneurship and digitization, such as the African SME Digital Hub and Lesotho Digital Business Program (Williams & Zhao, 2021; UNDP Lesotho, 2023; Chikafa & Kebede, 2023).</p>
+        </section>
+
+        <!-- Implementation Section -->
+        <section id="implementation" class="content-section animated delay-3">
+            <h3>Implementation Plan</h3>
+            <p>The successful implementation of the Inventory Management System (IMS) at MABURUNG Bakery will rely on a structured and phased approach that ensures minimal disruption, active stakeholder involvement, and effective change management. This plan considers technical development, user training, system testing, and post-implementation support.</p>
+            
+            <div class="timeline">
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h5>Phase 1: Requirements Gathering and Analysis (Week 1–2)</h5>
+                        <p>This initial phase is critical to aligning the system's capabilities with MABURUNG Bakery's operational goals. The implementation team will conduct interviews with bakery staff, including bakers, inventory managers, and procurement personnel, to gather insights into current challenges and workflow gaps. For example, interviews at other bakeries like Basotho Bakes and Queen Loaves revealed recurring issues such as ingredient duplication, manual miscounts, and delayed reorders. Additionally, document reviews and direct observations will be used to map out existing processes. According to Kumar and Singh (2021), incorporating end-user feedback early significantly improves system usability and acceptance.</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h5>Phase 2: System Design and Prototyping (Week 3–4)</h5>
+                        <p>In this stage, the technical team will translate gathered requirements into system wireframes, database schemas, and logical architectures. Prototypes of the UI—including inventory dashboards and restocking modules—will be shared with users for feedback. For instance, Tasty Treats Lesotho successfully refined its IMS prototype by integrating suggestions from kitchen staff who wanted batch recipe tracking on mobile. Moreover, the database will be normalized for scalability and security. Using tools such as Figma for UI and Lucidchart for data modeling ensures a visually clear representation of workflows, which aids stakeholder understanding (Mthimkhulu, 2022).</p>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h5>Phase 3: Development and Testing (Week 5–8)</h5>
+                        <p>This phase involves coding the core system functionalities, such as stock management, supplier ordering, and reporting dashboards. Unit testing will be conducted alongside development to identify and resolve bugs promptly. System testing scenarios will include edge cases such as double-entry prevention, ingredient expiry alerts, and concurrent logins. At CakeZone SME in Maseru, early testing of their IMS prevented a major rollout issue where incorrect restock alerts were being sent due to a timezone misalignment. Quality assurance teams will run load tests to simulate real-world usage, ensuring the system can support simultaneous users and high data loads (UNDP Lesotho, 2023).</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h5>Phase 4: Pilot Deployment (Week 9–10)</h5>
+                        <p>A pilot version of the system will be installed in the live bakery environment but with limited usage. Selected staff members will use the system during operations while maintaining backup records manually. Feedback on system navigation, performance, and interface clarity will be collected daily. At MorningGlory Pastries in Durban, a pilot rollout uncovered the need for audio notifications for low-stock items, which was later added to improve alert visibility during busy shifts. Any functional issues or usability barriers will be resolved before full launch (Kebede & Chikafa, 2023).</p>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h5>Phase 5: Full Deployment and Evaluation (Week 11–12)</h5>
+                        <p>The system will be fully deployed across all bakery departments with ongoing technical supervision. Staff will be guided through setup, login, and system operations. Performance metrics such as error rates, order delays, and inventory mismatches will be recorded. In Zambia, BreadLine SME experienced a 35% boost in operational efficiency following their full deployment thanks to well-executed change management and user training sessions. The bakery will also receive a post-implementation review and system usage report with recommendations for further improvement.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <h4>Maintenance Plan</h4>
+            <p>Post-deployment support is vital for long-term sustainability. The system will be monitored for performance drops, software bugs, or feature requests. Daily backups will be configured to safeguard against data loss. Furthermore, quarterly system audits will be conducted to ensure the software remains aligned with evolving business needs. As reported by Mthimkhulu (2022), SMEs that invested in ongoing system audits and support saw a 50% higher return on digital investment compared to those that did not. Helpdesk support via phone and email will be available for all staff.</p>
+            <p>This implementation plan is designed to reduce risk, encourage user adoption, and ensure that the IMS adds measurable value to MABURUNG Bakery's operations.</p>
+            
+            <h4>Risk Assessment and Mitigation Strategy</h4>
+            <p>The successful deployment of the Inventory Management System (IMS) at MABURUNG Bakery must proactively address potential risks to avoid disruptions and ensure business continuity. This section identifies major risk categories, their impacts, likelihood, and mitigation strategies, supported by real-world SME examples and scholarly references.</p>
+            
+            <div class="risk-matrix">
+                <div class="risk-category">
+                    <h5>1. Technical Risks</h5>
+                    <p>Technical challenges such as system bugs, data loss, or integration issues can disrupt operations. For example, at Golden Crust Bakery in Botswana, early-stage IMS deployment faced unexpected downtimes due to poorly configured database indexing. Similarly, LoveBread in Johannesburg experienced data migration issues when legacy Excel files were not properly backed up.</p>
+                    <p><strong>Mitigation:</strong> To mitigate these risks, the system will include rigorous pre-deployment testing, version-controlled backups, and robust data recovery mechanisms. Employing modular programming will also allow isolated fixes without full system disruption. According to Kumar and Singh (2021), modular IMS development reduced critical failure rates by up to 60% in SMEs.</p>
+                </div>
+                <div class="risk-category">
+                    <h5>2. Operational Risks</h5>
+                    <p>Changes in daily workflows may cause confusion among staff, leading to errors or resistance. At BakedDelight Lesotho, employee pushback emerged during an ERP rollout due to limited training sessions and sudden change in manual procedures. A similar case at FlourHouse in Malawi showed how inadequate onboarding increased inventory entry errors.</p>
+                    <p><strong>Mitigation:</strong> Measures include comprehensive user training, phased deployment (as proposed in the implementation plan), and assigning change champions. Training modules will be tailored to each role, using interactive dashboards and walkthroughs. Research by Kebede & Chikafa (2023) confirms that early and continuous training improves adoption and data accuracy.</p>
+                </div>
+                <div class="risk-category">
+                    <h5>3. Financial Risks</h5>
+                    <p>Budget overruns or unplanned costs could stall the project. SMEs often underestimate software licensing, infrastructure, or support service fees. For example, SweetCrumbs Bakery in Zambia had to pause their digital rollout due to underbudgeting for cloud server subscriptions.</p>
+                    <p><strong>Mitigation:</strong> To prevent this, the project will be governed by a detailed cost plan and a contingency buffer (approx. 15%) to handle unforeseen expenses. Local developers and open-source tools (e.g., PostgreSQL, Laravel) will be prioritized to cut costs. As stated by UNDP Lesotho (2023), using locally sourced ICT support reduced SME tech costs by 30%.</p>
+                </div>
+                <div class="risk-category">
+                    <h5>4. Security and Compliance Risks</h5>
+                    <p>Inventory systems may store sensitive data like supplier contracts, pricing, or internal reports. At MuffinMan Enterprises in Kenya, unauthorized employee access caused data leaks and supplier disputes. Moreover, lack of compliance with food safety and audit standards could trigger penalties.</p>
+                    <p><strong>Mitigation:</strong> This will be addressed by implementing role-based access control, encrypted backups, and compliance monitoring. Two-factor authentication (2FA) and automatic session timeouts will also be enforced. As Mthimkhulu (2022) notes, SMEs implementing access controls saw a 45% decrease in internal data breaches.</p>
+                </div>
+                <div class="risk-category">
+                    <h5>5. Strategic Risks</h5>
+                    <p>Misalignment between the IMS and future growth plans could render the system obsolete. For instance, Crust & Cream Maseru adopted a solution that lacked scalability, resulting in another costly system upgrade within a year.</p>
+                    <p><strong>Mitigation:</strong> To counter this, the IMS will be built on scalable architecture with plug-and-play APIs, ensuring that new features or modules can be integrated without full redesigns. Stakeholder reviews will occur quarterly to reassess system alignment with business goals.</p>
+                </div>
+            </div>
+            
+            <h4>Risk Management Strategy</h4>
+            <p>Implementing a new Inventory Management System (IMS) at MABURUNG Bakery comes with several potential risks that could affect its success. Identifying, analyzing, and preparing for these risks is crucial to ensuring smooth deployment and long-term stability. One of the most common risks is user resistance to change. Employees who are accustomed to manual tracking or spreadsheet-based workflows may struggle to adopt the new system, especially if they perceive it as complex or unnecessary. This challenge was observed at Butterbake SME in Quthing, where older staff delayed IMS usage due to fear of technology. To mitigate this, MABURUNG Bakery will implement a phased training program, incorporating one-on-one tutorials, simulation tools, and in-bakery support sessions. According to Kotter (2012), gradual exposure and empowerment significantly enhance user adoption during digital transitions.</p>
+            <p>Another major risk is data loss or corruption, especially during migration from manual records to digital platforms. If historical data on ingredients, suppliers, and past sales are not accurately transferred, it could cause reporting errors or supply chain disruptions. For instance, during digitization at SunLoaf Bakery in Bloemfontein, a missing supplier list led to a temporary halt in ingredient orders. MABURUNG Bakery will conduct multiple backup runs, test migration scripts, and employ checksum validation to ensure data integrity throughout the process. Mthimkhulu (2022) emphasizes that SMEs that use automated migration tools and cloud backup services are 45% more successful in preserving operational continuity during transitions.</p>
+            <p>A third potential risk involves system downtime or technical glitches after deployment, which could affect real-time operations like stock restocking or order placement. In 2021, ChesaLoaves Bakery faced operational delays when their IMS interface froze during peak morning shifts due to untested concurrent user loads. To prevent this at MABURUNG Bakery, the system will undergo rigorous stress testing during development, and a dedicated offline mode will be implemented. This mode allows users to continue logging transactions locally even if the main server becomes temporarily inaccessible. Additionally, an emergency technical support hotline will be available during the first three months post-launch (Kebede & Chikafa, 2023).</p>
+            <p>Finally, cybersecurity threats pose a serious concern, especially since the system will manage sensitive supplier and sales data. Unauthorized access or malware attacks can result in data breaches and financial loss. MABURUNG Bakery will implement role-based access controls (RBAC), strong password policies, and data encryption during transmission and storage. An example from e-Breadline Botswana showed that early investment in firewalls and secure socket layers (SSL) prevented unauthorized scraping of order data. Regular vulnerability assessments will also be conducted to ensure system integrity. As highlighted by UNDP Lesotho (2023), cybersecurity literacy and proactive defense mechanisms are now non-negotiable for SMEs moving to digital platforms.</p>
+            <p>By proactively addressing these risks through robust strategies, MABURUNG Bakery will be better positioned to enjoy the full benefits of its Inventory Management System while minimizing potential disruptions or losses.</p>
+        </section>
+
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="content-section animated delay-3">
+            <h3>System Dashboard</h3>
+            <p>Below is an interactive prototype of the Inventory Management System dashboard that demonstrates the key functionality described in the proposal.</p>
+            
+            <div class="dashboard">
+                <div class="sidebar">
+                    <ul class="sidebar-menu">
+                        <li><a href="#" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                        <li><a href="#"><i class="fas fa-boxes"></i> Inventory</a></li>
+                        <li><a href="#"><i class="fas fa-clipboard-list"></i> Orders</a></li>
+                        <li><a href="#"><i class="fas fa-truck"></i> Suppliers</a></li>
+                        <li><a href="#"><i class="fas fa-chart-bar"></i> Reports</a></li>
+                        <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+                        <li><a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                    </ul>
+                </div>
+                
+                <div class="main-content">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <i class="fas fa-box-open"></i>
+                            <h4>Total Items</h4>
+                            <p>48</p>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <h4>Low Stock</h4>
+                            <p class="warning">7</p>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-utensils"></i>
+                            <h4>Recipes</h4>
+                            <p>15</p>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-truck"></i>
+                            <h4>Suppliers</h4>
+                            <p>5</p>
+                        </div>
+                    </div>
+                    
+                    <h4>Low Stock Items</h4>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Item ID</th>
+                                    <th>Item Name</th>
+                                    <th>Category</th>
+                                    <th>Current Stock</th>
+                                    <th>Reorder Level</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>FL001</td>
+                                    <td>Wheat Flour</td>
+                                    <td>Dry Ingredients</td>
+                                    <td class="warning">12 kg</td>
+                                    <td>15 kg</td>
+                                    <td>
+                                        <button class="btn">Reorder</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>EG003</td>
+                                    <td>Eggs</td>
+                                    <td>Perishables</td>
+                                    <td class="warning">24 units</td>
+                                    <td>30 units</td>
+                                    <td>
+                                        <button class="btn">Reorder</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>BU005</td>
+                                    <td>Butter</td>
+                                    <td>Dairy</td>
+                                    <td class="warning">3 kg</td>
+                                    <td>5 kg</td>
+                                    <td>
+                                        <button class="btn">Reorder</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <h4>Recent Activity</h4>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Activity</th>
+                                    <th>User</th>
+                                    <th>Details</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>2025-05-05</td>
+                                    <td>Stock Update</td>
+                                    <td>Thabiso</td>
+                                    <td>Added 10kg of Sugar</td>
+                                </tr>
+                                <tr>
+                                    <td>2025-05-04</td>
+                                    <td>Order Placed</td>
+                                    <td>Lereto</td>
+                                    <td>Order #245 to GrainCo</td>
+                                </tr>
+                                <tr>
+                                    <td>2025-05-03</td>
+                                    <td>Stock Alert</td>
+                                    <td>System</td>
+                                    <td>Flour stock low</td>
+                                </tr>
+                                <tr>
+                                    <td>2025-05-02</td>
+                                    <td>New User</td>
+                                    <td>Admin</td>
+                                    <td>Added Boitumelo as Manager</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="inventory-controls">
+                        <button class="action-btn btn" id="add-item-btn"><i class="fas fa-plus"></i> Add Item</button>
+                        <button class="action-btn btn btn-secondary"><i class="fas fa-file-export"></i> Export Data</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Add Item Modal -->
+            <div class="modal" id="add-item-modal">
+                <div class="modal-content">
+                    <span class="close-modal">&times;</span>
+                    <h2>Add New Inventory Item</h2>
+                    <form id="add-item-form">
+                        <div class="form-group">
+                            <label for="item-name">Item Name</label>
+                            <input type="text" id="item-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="item-category">Category</label>
+                            <select id="item-category" required>
+                                <option value="">Select Category</option>
+                                <option value="Dry Ingredients">Dry Ingredients</option>
+                                <option value="Perishables">Perishables</option>
+                                <option value="Dairy">Dairy</option>
+                                <option value="Packaging">Packaging</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="item-quantity">Quantity</label>
+                            <input type="number" id="item-quantity" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="item-unit">Unit</label>
+                            <input type="text" id="item-unit" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="item-reorder">Reorder Level</label>
+                            <input type="number" id="item-reorder" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="item-supplier">Supplier</label>
+                            <input type="text" id="item-supplier" required>
+                        </div>
+                        <button type="submit" class="submit-btn">Add Item</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- References Section -->
+        <section class="content-section references">
+            <h4>References</h4>
+            <div class="reference-item">Chaffey, D. and White, G., 2011. Business Information Management: Improving Performance Using Information Systems. 2nd ed. Harlow: Pearson Education Limited.</div>
+            <div class="reference-item">Chikafa, T. & Kebede, B., 2023. Digital transformation in African SMEs: Inventory management as a tool for efficiency. African Business and Technology Journal, 15(2), pp.55–63.</div>
+            <div class="reference-item">Galliers, R.D. and Leidner, D.E., 2014. Strategic Information Management: Challenges and Strategies in Managing Information Systems. 4th ed. London: Routledge.</div>
+            <div class="reference-item">Hinton, M., 2006. Introducing Information Management: The Business Approach. Oxford: Routledge.</div>
+            <div class="reference-item">Kebede, B. & Chikafa, T., 2023. Digital transformation in African SMEs: Inventory management as a tool for efficiency. African Business and Technology Journal, 15(2), pp.55-63.</div>
+            <div class="reference-item">Khosrow-Pour, M., 2018. Encyclopedia of Information Science and Technology. 4th ed. Hershey: IGI Global.</div>
+            <div class="reference-item">Kotter, J., 2012. Leading Change. Boston: Harvard Business Review Press.</div>
+            <div class="reference-item">Kumar, A. & Saini, R., 2021. Inventory management systems and their impact on operational efficiency in SMEs. Journal of Small Business Systems, 12(2), pp.45-56.</div>
+            <div class="reference-item">Kumar, R. & Singh, V., 2021. Inventory Management Systems for Small Businesses: Design and Implementation. Journal of Business Systems, 9(4), pp.34–49.</div>
+            <div class="reference-item">Laudon, K.C. and Laudon, J.P., 2020. Management Information Systems: Managing the Digital Firm. 16th ed. Harlow: Pearson Education.</div>
+            <div class="reference-item">Lesotho Ministry of Small Business Development, 2021. Annual Report on SME Development and Innovation. Maseru: Government of Lesotho.</div>
+            <div class="reference-item">Mashaba, P., 2022. Cost management in small bakery operations using automation. African Business Review, 8(1), pp.18–27.</div>
+            <div class="reference-item">Mokoena, P., 2022. The role of traditional bakeries in Lesotho's food industry. Lesotho Business Review, 8(1), pp.33-38.</div>
+            <div class="reference-item">Molapo, S., 2022. Operational challenges faced by bakeries in Southern Africa. Lesotho Enterprise Review, 9(1), pp.22–29.</div>
+            <div class="reference-item">Mosebi, M., 2022. Technology Adoption among SMEs in Lesotho. Maseru: National University of Lesotho Research Papers.</div>
+            <div class="reference-item">Mthimkhulu, S., 2022. ICT Infrastructure for SMEs in Southern Africa. Lesotho IT Journal, 7(3), pp.12–20.</div>
+            <div class="reference-item">Mutula, S.M. & Van Brakel, P., 2020. ICT adoption and challenges in SMEs in Southern Africa. Journal of Information Management, 26(4), pp.15–29.</div>
+            <div class="reference-item">Nash, D.B. and Reifsnyder, J., 2011. Demand Better! Revive Our Broken Healthcare System. London: John Wiley & Sons</div>
+            <div class="reference-item">O'Brien, J.A. and Marakas, G.M., 2011. Management Information Systems. 10th ed. New York: McGraw-Hill.</div>
+            <div class="reference-item">Turban, E., Volonino, L. and Wood, G., 2015. Information Technology for Management: Advancing Sustainable, Profitable Business Growth. 10th ed. Hoboken: Wiley.</div>
+            <div class="reference-item">UNDP Lesotho, 2023. Supporting digital innovation for local SMEs. [online] Available at: https://www.ls.undp.org/sme-digitalization [Accessed 5 May 2025].</div>
+            <div class="reference-item">Williams, L. & Zhao, T., 2021. Efficiency through digital inventory systems in SMEs. Journal of Applied Business IT, 12(3), pp.44–52.</div>
+            <div class="reference-item">World Bank, 2023. Digital transformation for SMEs in Africa: Enabling inclusive growth. [online] Available at: https://www.worldbank.org/sme-digital-africa [Accessed 5 May 2025].</div>
+            <div class="reference-item">World Bank, 2023. SMEs and digital transformation in Southern Africa. [online] Available at: https://www.worldbank.org/sme-digitalization-africa [Accessed 5 May 2025].</div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>DISA/BISA2210 – Systems Analysis and Design | Week 14 Submission</p>
+            <p>© 2025 MABURUNG Bakery - All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                
+                // Update active nav link
+                document.querySelectorAll('.nav-links a').forEach(link => {
+                    link.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+        
+        // Modal functionality
+        const modal = document.getElementById("add-item-modal");
+        const btn = document.getElementById("add-item-btn");
+        const span = document.getElementsByClassName("close-modal")[0];
+        
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+        
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+        
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+        
+        // Form submission
+        document.getElementById("add-item-form").addEventListener("submit", function(e) {
+            e.preventDefault();
+            alert("Item added successfully!");
+            modal.style.display = "none";
+            this.reset();
+        });
+        
+        // Animation on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        document.querySelectorAll('.content-section').forEach(section => {
+            observer.observe(section);
+        });
+        
+        // Update active nav link based on scroll position
+        window.addEventListener('scroll', function() {
+            const fromTop = window.scrollY + 100;
+            
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                const section = document.querySelector(link.getAttribute('href'));
+                
+                if (
+                    section.offsetTop <= fromTop &&
+                    section.offsetTop + section.offsetHeight > fromTop
+                ) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
